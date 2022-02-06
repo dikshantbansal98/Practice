@@ -30,7 +30,7 @@ public:
     }
     
     bool canWin(int turn, int mouseX, int mouseY, int catX, int catY) {
-        if((catX == mouseX && catY == mouseY)||(catX == foodX && catY == foodY) || turn >= 70) {
+        if((catX == mouseX && catY == mouseY)||(catX == foodX && catY == foodY) || turn >= 69) {
             return turn%2 == 1;
         }
         if(mouseX == foodX && mouseY == foodY) {
