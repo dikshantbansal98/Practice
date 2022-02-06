@@ -30,7 +30,7 @@ public:
     }
     
     bool canWin(int turn, int mouseX, int mouseY, int catX, int catY) {
-        if((catX == mouseX && catY == mouseY)||(catX == foodX && catY == foodY) || turn >= 68) {
+        if((catX == mouseX && catY == mouseY)||(catX == foodX && catY == foodY) || turn >= 70) {
             return turn%2 == 1;
         }
         if(mouseX == foodX && mouseY == foodY) {
@@ -44,22 +44,14 @@ public:
         int jumps = turn%2==0? mouseJump: catJump;
         for(int i = 0; i < 4; ++i) {
             for(int j = 0; j <= jumps; ++j) {
-                if(turn%2==0) {
-                    int nMouseX = mouseX + j*dx[i];
-                    int nMouseY = mouseY + j*dy[i];
-                    if(nMouseX < 0 || nMouseY < 0 || nMouseX >= rows || nMouseY >= cols || grid[nMouseX][nMouseY] == '#')
-                        break;
-                    if(!canWin(turn+1, nMouseX, nMouseY, catX, catY))
-                        return dp[turn][mouseX][mouseY][catX][catY] = true;
-                }
-                else{
-                    int nCatX = catX + j*dx[i];
-                    int nCatY = catY + j*dy[i];
-                    if(nCatX < 0 || nCatY < 0 || nCatX >= rows || nCatY >= cols || grid[nCatX][nCatY] == '#')
-                        break;
-                    if(!canWin(turn+1, mouseX, mouseY, nCatX, nCatY))
-                        return dp[turn][mouseX][mouseY][catX][catY] = true;
-                }
+                int nMouseX = mouseX + (turn%2==0)*j*dx[i];
+                int nMouseY = mouseY + (turn%2==0)*j*dy[i];
+                int nCatX = catX + + (turn%2==1)*j*dx[i];
+                int nCatY = catY + + (turn%2==1)*j*dy[i];
+                if(nMouseX < 0 || nMouseY < 0 || nMouseX >= rows || nMouseY >= cols || nCatX < 0 || nCatY < 0 || nCatX >= rows || nCatY >= cols || grid[nMouseX][nMouseY] == '#' || grid[nCatX][nCatY] == '#')
+                    break;
+                if(!canWin(turn+1, nMouseX, nMouseY, nCatX, nCatY))
+                    return dp[turn][mouseX][mouseY][catX][catY] = true;
             }
         }
         return dp[turn][mouseX][mouseY][catX][catY] = false;
