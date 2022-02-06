@@ -6,12 +6,9 @@ public:
     vector<string>grid;
     
     bool canMouseWin(vector<string>& matrix, int cJump, int mJump) {
-        grid = matrix;
-        rows = grid.size();
-        cols = grid[0].size();
+        grid = matrix; rows = grid.size(); cols = grid[0].size();
         int mouseX, mouseY, catX, catY;
-        catJump = cJump;
-        mouseJump = mJump;
+        catJump = cJump; mouseJump = mJump;
         for(int i = 0; i < grid.size(); ++i) {
             for(int j = 0; j < grid[0].size(); ++j) {
                 if(grid[i][j] == 'M') {
@@ -44,10 +41,7 @@ public:
         int jumps = turn%2==0? mouseJump: catJump;
         for(int i = 0; i < 4; ++i) {
             for(int j = 0; j <= jumps; ++j) {
-                int nMouseX = mouseX + (turn%2==0)*j*dx[i];
-                int nMouseY = mouseY + (turn%2==0)*j*dy[i];
-                int nCatX = catX + + (turn%2==1)*j*dx[i];
-                int nCatY = catY + + (turn%2==1)*j*dy[i];
+                int nMouseX = mouseX + (turn%2==0)*j*dx[i], nMouseY = mouseY + (turn%2==0)*j*dy[i], nCatX = catX + + (turn%2==1)*j*dx[i], nCatY = catY + (turn%2==1)*j*dy[i];
                 if(nMouseX < 0 || nMouseY < 0 || nMouseX >= rows || nMouseY >= cols || nCatX < 0 || nCatY < 0 || nCatX >= rows || nCatY >= cols || grid[nMouseX][nMouseY] == '#' || grid[nCatX][nCatY] == '#')
                     break;
                 if(!canWin(turn+1, nMouseX, nMouseY, nCatX, nCatY))
