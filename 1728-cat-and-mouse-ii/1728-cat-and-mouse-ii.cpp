@@ -2,10 +2,7 @@ int dx[] = {-1,0,0,1};
 int dy[] = {0,-1,1,0};
 class Solution {
 public:
-    int catJump, mouseJump;
-    int rows, cols;
-    int foodX, foodY;
-    int dp[71][9][9][9][9];
+    int catJump, mouseJump, rows, cols, foodX, foodY, dp[71][9][9][9][9];
     vector<string>grid;
     
     bool canMouseWin(vector<string>& matrix, int cJump, int mJump) {
@@ -33,7 +30,7 @@ public:
     }
     
     bool canWin(int turn, int mouseX, int mouseY, int catX, int catY) {
-        if((catX == mouseX && catY == mouseY)||(catX == foodX && catY == foodY) || turn >= 71) {
+        if((catX == mouseX && catY == mouseY)||(catX == foodX && catY == foodY) || turn >= 70) {
             return turn%2 == 1;
         }
         if(mouseX == foodX && mouseY == foodY) {
