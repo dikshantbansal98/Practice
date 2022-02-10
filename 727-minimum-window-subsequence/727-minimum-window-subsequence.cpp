@@ -13,10 +13,10 @@ public:
                     }
                     continue;
                 }
-                if(i == 0) {
+                else if(i == 0) {
                     continue;
                 }
-                if(s1[i] == s2[j]) {
+                else if(s1[i] == s2[j]) {
                     dp[i][j] = dp[i-1][j-1];
                 }
                 else {
