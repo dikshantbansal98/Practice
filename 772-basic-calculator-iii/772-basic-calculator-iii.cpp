@@ -65,7 +65,7 @@ public:
                 }
                 operators.push(ch);
             }
-            cout<<operand.size()<<" "<<operators.size()<<" "<<i<<endl;
+
         }
         while(operators.size())
         {
