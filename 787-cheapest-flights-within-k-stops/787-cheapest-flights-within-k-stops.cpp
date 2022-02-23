@@ -2,7 +2,7 @@ class Solution {
 public:
     int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
         k++;
-        vector<vector<int>>dp(n,vector<int>(k+1,1e9));
+        vector<vector<int>>dp(n, vector<int>(k+1,1e9));
         for(int i = 0; i <= k; ++i) {
             dp[src][i] = 0;
         }
@@ -14,6 +14,9 @@ public:
         pq.push({0,src,k});
         while(!pq.empty()) {
             auto [distance, src, k] = pq.top(); pq.pop();
+            if(dst == src) {
+                return distance;
+            }
             for(auto [to,weight]: graph[src]) {
                 if(k >= 1 && dp[to][k-1]>distance+weight) {
                     dp[to][k-1] = distance+weight;
@@ -21,13 +24,6 @@ public:
                 }
             }
         }
-        int cheapestCombination = 1e9;
-        for(int i = 0; i <= k; ++i) {
-            cheapestCombination = min(cheapestCombination, dp[dst][i]);
-        }
-        if(cheapestCombination == 1e9) {
-            return -1;
-        }
-        return cheapestCombination;
+        return -1;
     }
 };
