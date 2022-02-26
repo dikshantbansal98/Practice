@@ -5,9 +5,7 @@ public:
         for(vector<int>&cuboid:cuboids) {
             sort(cuboid.begin(), cuboid.end());
         }
-        sort(cuboids.begin(), cuboids.end(), [](vector<int>&a, vector<int>&b){
-            return a[0]*a[1]*a[2] < b[0]*b[1]*b[2];
-        });
+        sort(cuboids.begin(), cuboids.end());
         vector<int>dp(n,0);
         for(int i = 0; i < n; ++i) {
             for(int j = 0; j < i; ++j) {
