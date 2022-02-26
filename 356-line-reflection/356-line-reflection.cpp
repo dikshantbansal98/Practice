@@ -10,7 +10,6 @@ public:
             newPoints.push_back(point);
         }
         points = newPoints;
-        cout<<points.size()<<endl;
         double value = 0;
         for(auto &point: points) {
             value += point[0];
