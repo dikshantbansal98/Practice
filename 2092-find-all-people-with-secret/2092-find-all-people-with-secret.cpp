@@ -10,7 +10,7 @@ class DSU {
             root[i] = i;
         }
         root[firstPerson] = 0;
-        rank[0] = 1e6;
+        rank[0] = 1e9;
     }
 
     void reset(int x) {
