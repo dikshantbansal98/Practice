@@ -11,17 +11,11 @@ public:
         {
             b[it-'a']++;
         }
-        int i;
-        for(i = 0;i<min(p.size(),s.size());++i)
+        for(int i = 0;i<s.size();++i)
         {
             a[s[i]-'a']++;
-        }
-        if(compare(a,b))
-            ans.push_back(0);
-        for(;i<s.size();++i)
-        {
-            a[s[i]-'a']++;
-            a[s[i-p.size()]-'a']--;
+            if(i>=p.size())
+                a[s[i-p.size()]-'a']--;
             if(compare(a,b))
             {
                 ans.push_back(i-p.size()+1);
