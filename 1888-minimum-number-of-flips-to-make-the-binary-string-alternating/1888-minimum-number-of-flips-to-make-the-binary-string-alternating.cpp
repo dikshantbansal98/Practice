@@ -21,7 +21,6 @@ public:
             else {
                 evens[s[i]-'0']++;
             }
-           
             ans = min({ans,odds[1]+evens[0],odds[0]+evens[1]});
         }
         return ans;
