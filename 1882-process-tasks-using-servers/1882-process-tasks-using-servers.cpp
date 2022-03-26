@@ -26,13 +26,3 @@ public:
         return result;
     }
 };
-
-// servers = [3,3,2] - weights of each server
-// tasks = [1,2,3,2,1,2] - time needed to process
-// At jth second jth task is inserted in queue
-// task is assigned to free server with (smallest weight, smallest index)
-    
-// busy - , (5time,0), (5time,2), (5time,1)
-// available - (3,1)
-    
-// 2,2,0,2,1
