@@ -1,14 +1,6 @@
 class Solution {
 public:
-    int dp[16][16];
-    int removeOnes(vector<vector<int>>& grid) {
-        // memset(dp,-1,sizeof(dp));
-        return solve(grid);
-    }
-    int solve(vector<vector<int>>& grid, int row = 0, int col = 0) {
-        // if(dp[row][col] !=- 1) {
-        //     return dp[row][col];
-        // }
+    int removeOnes(vector<vector<int>>& grid, int row = 0, int col = 0) {
         int ans = 1e9;
         bool isOne = false;
         for(int i = 0; i < grid.size(); ++i) {
@@ -21,7 +13,7 @@ public:
                 }
                 if(grid[i][j]) {
                     isOne = true;
-                    ans = min(ans, 1 + solve(grid, row|(1<<i), col|(1<<j)));
+                    ans = min(ans, 1 + removeOnes(grid, row|(1<<i), col|(1<<j)));
                 }
             }
         }
