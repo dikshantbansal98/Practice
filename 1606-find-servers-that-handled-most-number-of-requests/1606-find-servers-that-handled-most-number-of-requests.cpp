@@ -49,9 +49,3 @@ public:
         return available;
     }
 };
-
-
-// ith request - ith server available - assign to i%k server
-
-// available - set - indexes
-// busy - set - (avalableTime,index)
