@@ -14,17 +14,22 @@ public:
             if(available.empty()) {
                 continue;
             }
-            int position = i%k;
-            auto pos = available.lower_bound(position);
-            if(pos == available.end()) {
-                pos = available.begin();
-            }
-            position = *pos;
+            int position = getPosition(i,k,available);
             frequencies[position]++;
-            available.erase(pos);
             busy.insert({arrivalTime+loadTime, position});
         }
         return getResult(frequencies);
+    }
+    
+    int getPosition(int i, int k, set<int>&available) {
+        int position = i%k;
+        auto pos = available.lower_bound(position);
+        if(pos == available.end()) {
+            pos = available.begin();
+        }
+        position = *pos;
+        available.erase(pos);
+        return position;
     }
     
     vector<int> getResult(map<int,int>&frequencies) {
