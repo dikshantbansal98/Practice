@@ -46,43 +46,30 @@ public:
         rows = grid.size();
         cols = grid[0].size();
         dsu d(4*rows*cols);
-        for(int i = 0; i < rows; ++i)
-        	for(int j = 0; j < cols; ++j)
-        	{
+        for(int i = 0; i < rows; ++i) {
+        	for(int j = 0; j < cols; ++j) {
         		int root = 4*(i*cols+j);
         		char ch = grid[i][j];
-        		if(ch != '\\')
-        		{
+        		if(ch != '\\') {
         			d.merge(root+0,root+1);
         			d.merge(root+2,root+3);
         		}
-        		if(ch != '/')
-        		{
+        		if(ch != '/') {
         			d.merge(root+0,root+2);
         			d.merge(root+1,root+3);
         		}
-        		if(i)
-        		{
+        		if(i) {
         			d.merge(root+0,root-4*cols+3);
         		}
-        		// if(i<rows-1)
-        		// {
-        		// 	d.merge(root+3,root+4*cols+0);
-        		// }
-        		if(j)
-        		{
+        		if(j) {
         			d.merge(root+1,root-4+2);
         		}
-        		// if(j<cols-1)
-        		// {
-        		// 	d.merge(root+2,root+4+1);
-        		// }
         	}
-        	int ans = 0;
+        }
+        set<int>components;
         for(int i = 0; i<4*rows*cols; ++i)
-        	if(d.p[i]==i)
-        		ans++;
-        	return ans;
+        	components.insert(d.parent(i));
+        return components.size();
 
     }
 };
