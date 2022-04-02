@@ -16,19 +16,18 @@ int timer;
             for(auto edge:beforeItems[i])
             {
                 if(group[edge]!=group[i])
-                adjG[group[i]].push_back(group[edge]); 
+                    adjG[group[i]].push_back(group[edge]); 
                 else
-                adj[i].push_back(edge);
+                    adj[i].push_back(edge);
             }
         for(int i = 0; i < m; ++i)
         {
-            if(!dfs(i,orderG,adjG,visG))
+            if(!visG[i] && !dfs(i,orderG,adjG,visG))
                 return vector<int>{};
         }
-
         for(int i = 0; i < n; ++i)
         {
-            if(!dfs(i,order,adj,vis))
+            if(!vis[i] && !dfs(i,order,adj,vis))
                 return vector<int>{};
         }
         map<int,vector<int>>map1;
@@ -46,13 +45,13 @@ int timer;
     }
     bool dfs(int u, vector<int>&ord, vector<vector<int>>&G, vector<int>&visited)
     {
-        
-        if(visited[u]>0)
-            return visited[u] == 2;
         visited[u] = 1;
-        for(auto it:G[u])
+        for(auto &to:G[u])
         {
-            if(!dfs(it,ord,G,visited))
+            if(visited[to]==1) {
+                return false;
+            }
+            else if(!visited[to] && !dfs(to,ord,G,visited))
                 return false;
         }
         ord.push_back(u);
