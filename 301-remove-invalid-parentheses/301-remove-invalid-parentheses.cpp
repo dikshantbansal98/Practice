@@ -1,6 +1,6 @@
 class Solution {
 public:
-    set<string>validStrings;
+    unordered_set<string>validStrings;
     vector<string> removeInvalidParentheses(string s) {
         int removeClosing = 0, extraOpen = 0;
         for(char &ch: s) {
