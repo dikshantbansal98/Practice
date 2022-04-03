@@ -2,9 +2,9 @@ class Solution {
 public:
     bool isPossible(vector<int>& nums) {
         queue<int>q;
-        vector<int>frequencies(2002);
+        vector<int>frequencies(2004);
         for(int &num:nums) {
-            frequencies[num+1000]++;
+            frequencies[num+1001]++;
         }
         for(int i = 1; i <= 2001; ++i) {
             int diff = frequencies[i]-frequencies[i-1];
