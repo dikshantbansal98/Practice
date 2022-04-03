@@ -13,6 +13,3 @@ public:
         return dp[n-1];
     }
 };
-
-
-//dp[j-1]-prices[j]-fee
