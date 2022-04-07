@@ -23,7 +23,6 @@ public:
             int start = paint[0], end = paint[1];
             while(position!=hash.end() && position->first < paint[1]) {
                 int overlap = overLapAmount({paint[0],paint[1]}, *position);
-                cout<<overlap<<endl;
                 if(overlap > 0) {
                     amount += overlap;
                     auto [first,second] = merge({start,end}, *position);
