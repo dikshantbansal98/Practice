@@ -18,24 +18,19 @@ public:
         }
         return position;
     }
-    //0-4
-    //
+
     vector<int> amountPainted(vector<vector<int>>& paints) {
         vector<int>result;
         for(vector<int>&paint: paints) {
             int amount = 0, start = paint[0], end = paint[1];
             auto position = getPosition(start, end);
             while(position!=ranges.end() && position->first < paint[1]) {
-                int overlap = overLapAmount({paint[0],paint[1]}, *position);
-                if(overlap >= 0) {
-                    amount += overlap;
+                amount += overLapAmount({paint[0],paint[1]}, *position);
+               
                     start = min(start, position->first);
                     end = max(end, position->second);
                     ranges.erase(position++);
-                }
-                else {
-                    position++;
-                }
+               
             }
             ranges[start] = end;
             result.push_back(paint[1]-paint[0]-amount);
