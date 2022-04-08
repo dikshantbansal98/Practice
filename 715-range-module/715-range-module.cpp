@@ -48,10 +48,6 @@ public:
             ranges[x] = y;
         }
     }
-    
-    pair<int,int> merge(pair<int,int>point1, pair<int,int>point2) {
-        return {min(point1.first,point2.first),max(point1.second,point2.second)};
-    }
 };
 
 /**
