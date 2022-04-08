@@ -13,8 +13,7 @@ public:
         return invitations;
     }
     
-    bool match(int start, vector<bool>&visited, vector<vector<int>>& grid) {
-        
+    bool match(int start, vector<bool>&visited, vector<vector<int>>& grid) {      
         for(int to = 0; to < grid[start].size(); ++to) {
             if(!visited[to] && grid[start][to]) {
                 visited[to] = true;
