@@ -26,10 +26,9 @@ public:
             auto position = getPosition(start, end);
             while(position!=ranges.end() && position->first < paint[1]) {
                 amount += overLapAmount({paint[0],paint[1]}, *position);
-               
-                    start = min(start, position->first);
-                    end = max(end, position->second);
-                    ranges.erase(position++);
+                start = min(start, position->first);
+                end = max(end, position->second);
+                ranges.erase(position++);
                
             }
             ranges[start] = end;
