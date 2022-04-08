@@ -1,51 +1,37 @@
 class RangeModule {
 public:
     map<int,int>ranges;
-    RangeModule() {
-        
-    }
+    RangeModule() {}
     
-    void printMap() {
-        for(auto [key,value]: ranges) {
-            cout<<key<<" "<<value<<endl;
-        }
-    }
-    
-    void addRange(int left, int right) {
+    map<int,int>::iterator getPosition(int left, int right) {
         auto position = ranges.upper_bound(left);
         if(position != ranges.begin()) {
             position--;
         }
+        if(position != ranges.end() && position->second < left) {
+            position++;
+        }
+        return position;
+    }
+    
+    void addRange(int left, int right) {
         int start = left, end = right;
+        auto position = getPosition(start, end);
         while(position != ranges.end() && position->first <= right) {
-            if(position->second<start) {
-                position++;
-                continue;
-            }
             start = min(start, position->first);
             end = max(end, position->second);
             ranges.erase(position++);
         }
         ranges[start] = end;
-        //printMap();
     }
     
     bool queryRange(int left, int right) {
-        auto position = ranges.upper_bound(left);
-        if(position != ranges.begin()) {
-            position--;
-        }
-        else {
-            return false;
-        }
-        return position->first <= left && position->second>=right;
+        auto position = getPosition(left, right);
+        return position!=ranges.end() && position->first <= left && position->second>=right;
     }
     
     void removeRange(int left, int right) {
-        auto position = ranges.upper_bound(left);
-        if(position != ranges.begin()) {
-            position--;
-        }
+        auto position = getPosition(left, right);
         vector<pair<int,int>>pairs;
         while(position != ranges.end() && position->first < right) {
             auto pair = *position;
@@ -65,7 +51,6 @@ public:
         for(auto [x,y]:pairs) {
             ranges[x] = y;
         }
-        //printMap();
     }
     
     pair<int,int> merge(pair<int,int>point1, pair<int,int>point2) {
