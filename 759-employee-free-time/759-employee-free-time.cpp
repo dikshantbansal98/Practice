@@ -36,26 +36,24 @@ public:
     }
     
     vector<Interval> merge(vector<Interval>first, vector<Interval>second) {
-        int i = 0;
+        int i = 0, j = 0;
         vector<Interval>result;
-        for(auto interval: second) {
-            first.push_back(interval);
-        }
-        sort(first.begin(),first.end(), [](Interval a, Interval b) {
-            if(a.start == b.start) {
-                return a.end<b.end;
+        while(i < first.size() || j < second.size()) {
+            Interval merger;
+            if(j >= second.size() || ( i < first.size() && j < second.size() && first[i].start < second[j].start)) {
+                merger = first[i];
+                i++;
             }
-            return a.start < b.start;
-        });
-        while(i < first.size()) {
-            Interval merger = first[i];
+            else {
+                merger = second[j];
+                j++;
+            }
             if(result.size() == 0 || result.back().end < merger.start) {
                 result.push_back(merger);
             }
             else {
                 result[result.size()-1] = Interval(min(result.back().start,merger.start), max(merger.end,result.back().end));
             }
-            i++;
         }
         return result;
     }
