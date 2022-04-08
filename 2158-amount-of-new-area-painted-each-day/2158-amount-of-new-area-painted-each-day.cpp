@@ -2,10 +2,7 @@ class Solution {
 public:
     map<int,int>ranges;
     int overLapAmount(pair<int,int>segment1, pair<int,int>segment2) {
-        if(segment1.first >= segment2.second || segment2.first >= segment1.second) {
-            return 0;
-        }
-        return min(segment1.second,segment2.second) - max(segment1.first,segment2.first);
+        return max(0,min(segment1.second,segment2.second) - max(segment1.first,segment2.first));
     }
     
     map<int,int>::iterator getPosition(int left, int right) {
