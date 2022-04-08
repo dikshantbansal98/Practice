@@ -35,10 +35,6 @@ public:
         vector<pair<int,int>>pairs;
         while(position != ranges.end() && position->first < right) {
             auto pair = *position;
-            if(pair.second < left) {
-                position++;
-                continue;
-            }
             if(pair.first<left) {
                 pairs.push_back({pair.first,left});
             }
