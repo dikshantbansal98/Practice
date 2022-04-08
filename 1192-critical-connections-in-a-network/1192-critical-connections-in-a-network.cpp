@@ -46,7 +46,7 @@ public:
             }
             else {
                 dfs(to, source);
-                low[source] = min({low[source], low[to], in[to]});
+                low[source] = min({low[source], low[to]});
             }
             if(low[to]>in[source]) {
                 addBridge(source, to);
