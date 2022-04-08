@@ -41,13 +41,10 @@ public:
             if(parent == to) {
                 continue;
             }
-            if(visited[to]) {
-                low[source] = min(low[source], low[to]);
-            }
-            else {
+            if(!visited[to]) {
                 dfs(to, source);
-                low[source] = min({low[source], low[to]});
             }
+            low[source] = min({low[source], low[to]});
             if(low[to]>in[source]) {
                 addBridge(source, to);
             }
