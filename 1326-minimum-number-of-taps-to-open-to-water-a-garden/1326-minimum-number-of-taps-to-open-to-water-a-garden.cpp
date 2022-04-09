@@ -9,8 +9,9 @@ public:
             for(int j = left+1; j <= right; ++j)
                 dp[j] = min(dp[j],dp[left]+1);
         }
-        if(dp[n]==1e9)
-            dp[n] = -1;
-        return dp[n];
+        int ans = *max_element(dp.begin(), dp.end());
+        if(ans==1e9)
+            ans = -1;
+        return ans;
     }
 };
