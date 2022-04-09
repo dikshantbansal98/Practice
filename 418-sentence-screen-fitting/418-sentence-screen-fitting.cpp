@@ -5,8 +5,9 @@ public:
         for(string &word: sentence) {
             completeSentence += word + ' ';
         }
-        vector<int>dp(completeSentence.size());
-        for(int i = 1; i < completeSentence.size(); ++i) {
+        int sentenceSize = completeSentence.size();
+        vector<int>dp(sentenceSize);
+        for(int i = 1; i < sentenceSize; ++i) {
             if(completeSentence[i] == ' ') {
                 dp[i] = 1;
             }
@@ -15,7 +16,6 @@ public:
             }
         }
         int placedChars = 0;
-        int sentenceSize = completeSentence.size();
         for(int i = 0; i < rows; ++i) {
             placedChars += cols;
             placedChars += dp[placedChars%sentenceSize];
@@ -23,3 +23,12 @@ public:
         return placedChars/sentenceSize;
     }
 };
+/*
+//  h  e  l  l  o   w  o  r  l  d
+//  0 -1 -2 -3 -4 1 0 -1 -2 -3  -4
+    0  1  2  3  4 5 6  7  8  9  10
+
+//sentenceSize = 12
+
+//placedChars = 14
+*/
