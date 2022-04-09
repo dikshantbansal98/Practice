@@ -9,7 +9,7 @@ public:
     	for(int i = 1;i< prices.size();++i)
     	{
     		dp[i] = max(dp[i-1],maxi+prices[i]);
-    		maxi = max(maxi,dp[i-1]-prices[i]);
+    		maxi = max({maxi,dp[i-1]-prices[i],-prices[i]});
     	}    
     	return dp[prices.size()-1];
     }
