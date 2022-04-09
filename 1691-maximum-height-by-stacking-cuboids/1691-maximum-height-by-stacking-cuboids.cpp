@@ -6,14 +6,15 @@ public:
             sort(cuboid.begin(), cuboid.end());
         }
         sort(cuboids.begin(), cuboids.end());
-        vector<int>dp(n,0);
+        vector<int>dp(n);
         for(int i = 0; i < n; ++i) {
+            dp[i] = cuboids[i][2];
             for(int j = 0; j < i; ++j) {
                 if(isLess(cuboids[j], cuboids[i])) {
-                    dp[i] = max(dp[i], dp[j]);
+                    dp[i] = max(dp[i], dp[j]+cuboids[i][2]);
                 }
             }
-            dp[i] += cuboids[i][2];
+            
         }
         return *max_element(dp.begin(), dp.end());
     }
