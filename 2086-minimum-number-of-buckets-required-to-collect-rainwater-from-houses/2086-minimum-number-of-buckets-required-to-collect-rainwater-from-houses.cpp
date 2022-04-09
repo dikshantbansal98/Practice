@@ -11,12 +11,11 @@ public:
                 ans++;
                 i = i + 2;
             }
-            else{
-                if(i && street[i-1]=='.')
+            else if(i && street[i-1]=='.')
                     ans++;
-                else
-                    return -1;
-            }
+            else
+                return -1;
+            
         }
         return ans;
     }
