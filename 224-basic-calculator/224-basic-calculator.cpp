@@ -2,7 +2,6 @@ class Solution {
 public:
     stack<string>stack;
     string expression;
-
     
     void removeSpaces() {
         string str = "";
