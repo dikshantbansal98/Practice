@@ -72,7 +72,7 @@ public:
             else if(expression[i] == ')') {
                 compute();
             }
-            else if(expression[i] == '-') {
+            else if(expression[i] == '-'){
                 sign = 1;
             }
         }
