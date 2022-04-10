@@ -57,7 +57,6 @@ public:
     
     int calculate(string s) {
         expression = s;
-        removeSpaces();
         int sign = 0;
         for(int i = 0; i < expression.size(); ++i) {
             if(isdigit(expression[i])) {
