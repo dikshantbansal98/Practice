@@ -2,8 +2,7 @@ class Solution {
 public:
     stack<char>operators;
     stack<int>operand;
-    int precedence(char ch)
-    {
+    int precedence(char ch) {
         if(ch == '+' || ch == '-')
             return 1;
         if(ch == '*' || ch == '/' || ch == '%')
@@ -11,8 +10,7 @@ public:
         return 0;
     }
     
-    int operation(int first, int second, char op)
-    {
+    int operation(int first, int second, char op) {
         if(op == '+')
             return first + second;
         else if(op == '-')
@@ -60,7 +58,6 @@ public:
     
     int calculate(string &s) {
         removeEmptyChars(s);
-        int lastNumber = 0;
         for(int i = 0; i < s.size(); ++i) {
             char ch = s[i];
             if(isdigit(ch)) {
