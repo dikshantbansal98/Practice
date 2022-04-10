@@ -1,7 +1,7 @@
 class Solution {
 public:
     stack<char>operators;
-    stack<int>operand;
+    stack<long long>operand;
     int precedence(char ch) {
         if(ch == '+' || ch == '-')
             return 1;
@@ -10,7 +10,7 @@ public:
         return 0;
     }
     
-    int operation(int first, int second, char op) {
+    long long operation(long long first, long long second, char op) {
         if(op == '+')
             return first + second;
         else if(op == '-')
@@ -40,7 +40,7 @@ public:
     }
     
     void addOperand(string &s, int &i) {
-        int val = 0;
+        long long val = 0;
         while(i<s.size() && isdigit(s[i])) {
             val = val*10 + s[i]-'0';
             i++;
@@ -50,8 +50,8 @@ public:
     }
     
     void compute() {
-        int second = operand.top(); operand.pop();
-        int first = operand.top(); operand.pop();
+        long long second = operand.top(); operand.pop();
+        long long first = operand.top(); operand.pop();
         operand.push(operation(first,second,operators.top()));
         operators.pop();
     }
