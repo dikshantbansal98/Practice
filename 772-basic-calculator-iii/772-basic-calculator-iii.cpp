@@ -1,16 +1,17 @@
 class Solution {
 public:
+    stack<char>operators;
+    stack<int>operand;
     int precedence(char ch)
     {
         if(ch == '+' || ch == '-')
-        return 1;
-        if(ch == '*' || ch == '/')
-        return 2;
-        
+            return 1;
+        if(ch == '*' || ch == '/' || ch == '%')
+            return 2;
         return 0;
-        
     }
-    int operation(int first,int second, char op)
+    
+    int operation(int first, int second, char op)
     {
         if(op == '+')
             return first + second;
@@ -20,60 +21,62 @@ public:
             return first*second;
         return first/second;
     }
-    int calculate(string &s) {
-        // Write your code here
+    
+    void removeEmptyChars(string &s) {
         string str = "";
-        stack<char>operators;
-        stack<int>operand;
-        for(int i = 0; i < s.size(); ++i)
-            if(s[i] != ' ')
+        for(int i = 0; i < s.size(); ++i) {
+            if(s[i] != ' ') {
                 str += s[i];
-        for(int i = 0; i < str.size(); ++i)
-        {
-            char ch = str[i];
-            if(isdigit(ch))
-            {
+            }
+        }
+        s = str;
+    }
+    
+    void computeLastValues() {
+        while(operators.size() && operators.top()!='(') {
+            compute();
+        }
+        if(operators.size()) {
+            operators.pop();
+        }
+    }
+    
+    void compute() {
+        int second = operand.top(); operand.pop();
+        int first = operand.top(); operand.pop();
+        operand.push(operation(first,second,operators.top()));
+        operators.pop();
+    }
+    
+    int calculate(string &s) {
+        removeEmptyChars(s);
+        int lastNumber = 0;
+        for(int i = 0; i < s.size(); ++i) {
+            char ch = s[i];
+            if(isdigit(ch)) {
                 int val = 0;
-                while(i<str.size() && isdigit(str[i]))
-                {
-                    val = val*10 + str[i]-'0';i++;
+                while(i<s.size() && isdigit(s[i])) {
+                    val = val*10 + s[i]-'0';
+                    i++;
                 }
                 i--;
                 operand.push(val);
             }
-            else if(ch == '(')
+            else if(ch == '(') {
                 operators.push(ch);
-            else if(ch == ')')
-            {
-                while(operators.top()!='(')
-                {
-                    int second = operand.top(); operand.pop();
-                    int first = operand.top(); operand.pop();
-                    operand.push(operation(first,second,operators.top()));
-                    operators.pop();
-                }
-                operators.pop();
             }
-            else
-            {
-                while(operators.size() && precedence(operators.top())>=precedence(ch))
-                {
-                    int second = operand.top(); operand.pop();
-                    int first = operand.top(); operand.pop();
-                    operand.push(operation(first,second,operators.top()));
-                    operators.pop();
+            else if(ch == ')') {
+                computeLastValues();
+            }
+            else {
+                while(operators.size() && precedence(operators.top())>=precedence(ch)) {
+                    compute();
                 }
                 operators.push(ch);
             }
 
         }
-        while(operators.size())
-        {
-            int second = operand.top(); operand.pop();
-            int first = operand.top(); operand.pop();
-            operand.push(operation(first,second,operators.top()));
-            operators.pop();
-        }
+        computeLastValues();
         return operand.top();
     }
 };
