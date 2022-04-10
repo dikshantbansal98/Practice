@@ -63,12 +63,6 @@ public:
             if(isdigit(ch)) {
                 addOperand(s,i);
             }
-            else if(ch == '(') {
-                operators.push(ch);
-            }
-            else if(ch == ')') {
-                computeLastValues();
-            }
             else {
                 while(operators.size() && precedence(operators.top())>=precedence(ch)) {
                     compute();
