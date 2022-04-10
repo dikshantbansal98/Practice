@@ -41,6 +41,16 @@ public:
         }
     }
     
+    void addOperand(string &s, int &i) {
+        int val = 0;
+        while(i<s.size() && isdigit(s[i])) {
+            val = val*10 + s[i]-'0';
+            i++;
+        }
+        i--;
+        operand.push(val);
+    }
+    
     void compute() {
         int second = operand.top(); operand.pop();
         int first = operand.top(); operand.pop();
@@ -54,13 +64,7 @@ public:
         for(int i = 0; i < s.size(); ++i) {
             char ch = s[i];
             if(isdigit(ch)) {
-                int val = 0;
-                while(i<s.size() && isdigit(s[i])) {
-                    val = val*10 + s[i]-'0';
-                    i++;
-                }
-                i--;
-                operand.push(val);
+                addOperand(s,i);
             }
             else if(ch == '(') {
                 operators.push(ch);
