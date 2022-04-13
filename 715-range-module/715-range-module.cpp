@@ -40,7 +40,6 @@ public:
             }
             if(pair.second>right) {
                 pairs.push_back({right,pair.second});
-                ranges[right] = pair.second;
             }
             ranges.erase(position++);
         }
